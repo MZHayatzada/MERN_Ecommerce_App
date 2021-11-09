@@ -87,17 +87,17 @@ const Footer = () => {
           <div className="row">
             <div className="col-lg-6">
               <p className="small text-muted mb-0">
-                &copy; 2020 All rights reserved.
+                &copy; 2021 All rights reserved.
               </p>
             </div>
             <div className="col-lg-6 text-lg-right">
               <p className="small text-muted mb-0">
                 Template designed by
                 <a
-                  class="text-white reset-anchor"
+                  className="text-white reset-anchor"
                   href="https://bootstraptemple.com/p/bootstrap-ecommerce"
                 >
-                  Bootstrap Temple
+                  By M.Zafar
                 </a>
               </p>
             </div>

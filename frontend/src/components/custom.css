@@ -20,3 +20,7 @@
     background-color: #dcb14a !important;
     border-color: #dcb14a !important;
 }
+
+.hero {
+    background: url(hero-banner-alt.jpg);
+}
