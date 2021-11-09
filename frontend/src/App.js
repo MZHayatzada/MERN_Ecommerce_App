@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Nav from "./components/Nav";
@@ -8,6 +7,7 @@ import Register from "./components/Register";
 import Footer from "./components/Footer";
 import CartScreen from "./Views/CartScreen";
 import HomeScreen from "./Views/HomeScreen";
+import ShopScreen from "./Views/ShopScreen";
 function App() {
   return (
     <Router>
@@ -24,6 +24,9 @@ function App() {
         </Route>
         <Route exact path='/'>
           <HomeScreen/>
+        </Route>
+        <Route exact path='/shop'>
+          <ShopScreen/>
         </Route>
         <Footer></Footer>
       </div>
