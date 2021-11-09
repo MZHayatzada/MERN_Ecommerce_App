@@ -1,0 +1,22 @@
+/* your styles go here */
+
+@media screen and (min-width:786px) {
+    .form {
+        width: 30% !important;
+        margin-top: 7rem;
+    }
+}
+
+.heading h1 {
+    color: #dcb14a;
+}
+
+.navigation-link {
+    margin-top: 5px;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #dcb14a !important;
+    border-color: #dcb14a !important;
+}
