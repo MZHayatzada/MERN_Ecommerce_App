@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Register from "./components/Register";
 import Footer from "./components/Footer";
 import CartScreen from "./Views/CartScreen";
+import HomeScreen from "./Views/HomeScreen";
 function App() {
   return (
     <Router>
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path='/cart'>
           <CartScreen/>
+        </Route>
+        <Route exact path='/'>
+          <HomeScreen/>
         </Route>
         <Footer></Footer>
       </div>
