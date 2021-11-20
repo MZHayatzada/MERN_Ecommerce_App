@@ -4,7 +4,6 @@ const { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, GET_PRODUCT_REQUEST, GET_PRODU
 export const login_user = (email, password) => async(dispatch) => {
         try {
             dispatch({ type: LOGIN_REQUEST });
-            console.log(email, password);
             const response = await axios.post('/login', { email, password })
             dispatch({ type: LOGIN_SUCCESS, payload: response })
         } catch (error) {
@@ -14,10 +13,10 @@ export const login_user = (email, password) => async(dispatch) => {
     //Get products
 export const getProducts = () => async(dispatch) => {
     try {
-        dispatch({ type: GET_PRODUCT_REQUEST, loading: true });
-        const response = await axios.get();
-        dispatch({ type: GET_PRODUCT_SUCCESS, loading: false, payload: response })
+        dispatch({ type: GET_PRODUCT_REQUEST });
+        const { data } = await axios.get('/products');
+        dispatch({ type: GET_PRODUCT_SUCCESS, payload: data })
     } catch (error) {
-        dispatch({ type: GET_PRODUCT_FAIL, loading: false, payload: error })
+        dispatch({ type: GET_PRODUCT_FAIL, payload: error })
     }
 }
