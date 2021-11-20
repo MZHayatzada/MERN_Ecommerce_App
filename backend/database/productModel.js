@@ -9,13 +9,12 @@ const productSchema = new Schema({
     quantity: { type: String, required: true },
     category: { type: String, required: true },
     longDescription: { type: String, required: true },
-    reviews: [{ type: Schema.Types.ObjectId, ref: 'reviewSchema' }]
+    reviews: [{
+        reviewer: { type: String, require: true },
+        review: { type: String },
+        rating: { type: Number }
+    }]
 })
-const reviewSchema = new Schema({
-    reviewer: { type: String, require: true },
-    review: { type: String },
-    rating: { type: Number }
-})
-const Review = mongoose.model('Review', reviewSchema)
+
 const Product = mongoose.model('Product', productSchema)
 module.exports = Product;

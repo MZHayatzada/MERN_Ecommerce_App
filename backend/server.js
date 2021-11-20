@@ -1,23 +1,17 @@
 const express = require('express');
 const app = express();
-const User = require('./schema')
+const User = require('./database/userModel')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const asyncHandler = require('express-async-handler')
 app.use(express.json());
 dotenv.config()
 const Product = require('./database/productModel');
 const products = require('./data');
 //Working on bacnkend branch
 
-app.post('/products', async(req, res) => {
-    try {
-        await Product.deleteMany({})
-        await Product.create(products)
-        res.status(201).json({ msg: 'data added' })
-    } catch (error) {
-        console.log(error);
-    }
-})
+
+//Login / Register endpoints
 
 app.post('/register', async(req, res) => {
     const { username, email, password } = req.body.user;
@@ -51,6 +45,28 @@ app.post('/login', async(req, res) => {
         throw new Error('Error')
     }
 })
+
+
+//Products endpoints 
+
+app.post('/products', asyncHandler(async(req, res) => {
+
+    await Product.deleteMany({})
+    await Product.insertMany(products)
+    res.status(201).json({ msg: 'data added' })
+
+}))
+
+
+app.get('/products', asyncHandler(async(req, res) => {
+
+    const products = await Product.find();
+    res.status(200).json(products);
+    if (!products) {
+        throw new Error('Data did not found!')
+    }
+}))
+
 
 const start = () => {
     try {

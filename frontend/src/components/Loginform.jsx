@@ -1,25 +1,18 @@
+import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-const Loginform = () => {
+import {login_user} from '../redux/actions'
+const Loginform = ({userLogin}) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
   const [login, setLogin] = useState(false);
 
-  const loginHandler = async (e) => {
-    e.preventDefault();
-   try {
-    const login = await axios.post("/login", { user });
-    const { data } = login;
-    if (data.username) {
-      setLogin(true);
-    }
-   } catch (error) {
-     alert('Wrong email or password')
-   }
+  const loginHandler =  (e) => {
+    e.preventDefault()
+    userLogin(user.email,user.password)
   };
 
   const history = useHistory();
@@ -70,9 +63,22 @@ const Loginform = () => {
           Login
         </button>
       </form>
-      <Link to="/register"> <p className="mt-3">Create Account</p> </Link>
+      <Link to="/register"> <p className="mt-3">Create Account </p> </Link>
     </div>
   );
 };
 
-export default Loginform;
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    userLogin:(email,password)=>dispatch(login_user(email,password))
+  }
+}
+
+const mapStateToProps = (state)=>{
+  // console.log(state.user.data.username);
+  let username = ''
+  return {
+    // username:state.user.data.username
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps) (Loginform);
