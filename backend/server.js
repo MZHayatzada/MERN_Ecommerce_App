@@ -68,6 +68,16 @@ app.get('/products', asyncHandler(async(req, res) => {
 }))
 
 
+app.get('/products/:id', asyncHandler(async(req, res) => {
+    const productId = parseInt(req.params.id);
+    const singleProduct = await Product.findOne({ id: productId });
+    if (!singleProduct) {
+        res.status(404).json({ msg: "Product did not found" });
+    }
+    res.status(200).json({ singleProduct });
+}))
+
+
 const start = () => {
     try {
         app.listen(4000, () => {

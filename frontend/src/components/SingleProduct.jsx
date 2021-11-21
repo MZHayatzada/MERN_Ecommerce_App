@@ -3,13 +3,13 @@ import { faExpand } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import {Link} from 'react-router-dom';
-const SingleProduct = ({name,price,image}) => {
+const SingleProduct = ({id,name,price,image}) => {
     return (
         <div className="col-lg-4 col-sm-6">
         <div className="product text-center">
           <div className="mb-3 position-relative">
             <div className="badge text-white badge-"></div>
-            <Link className="d-block" to='/singleProduct'>
+            <Link className="d-block" to={`/singleProduct/${id}`}>
               <img
                 className="img-fluid w-100"
                 src={image}
