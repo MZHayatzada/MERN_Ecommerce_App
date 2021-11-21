@@ -2,7 +2,7 @@
 
 Credit of UI: https://bootstrapious.com/p/boutique-bootstrap-e-commerce-template
  
-==>I am not good designer so I take ready made template from above website.<==
+==>I am not good designer so I took ready made template from above website.<==
 
 I learned MERN Stack so I decided to do practice and I started working on this project.
 
@@ -13,5 +13,6 @@ State management: React-Redux
 
 Backend: mongodb cloud,nodejs,express,mongoose.
 
-Modules
+Modules (Most not yet implemented)
+Login, Create Account, Shopping Cart, Payment, Store products.
 
