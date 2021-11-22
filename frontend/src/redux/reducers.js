@@ -33,11 +33,11 @@ export const getProductReducer = (state = [], action) => {
 
 //Practice of if for different action type
 export const getSingleProductReducer = (state = [], action) => {
-    if (action.type == GET_SINGLE_PRODUCT_REQUEST) {
+    if (action.type === GET_SINGLE_PRODUCT_REQUEST) {
         return { loading: true }
-    } else if (action.type == GET_SINGLE_PRODUCT_SUCCESS) {
+    } else if (action.type === GET_SINGLE_PRODUCT_SUCCESS) {
         return { loading: false, data: action.payload }
-    } else if (action.type == GET_SINGLE_PRODUCT_FAIL) {
+    } else if (action.type === GET_SINGLE_PRODUCT_FAIL) {
         return { loading: false, error: action.payload }
     } else {
         return state

@@ -1,147 +1,121 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-// import "../App.css";
 import "./custom.css";
 import "./style.default.css";
 import "./style.default.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import "./navStyle.css";
 import { faDollyFlatbed, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import NavLink from "./NavLink";
+import NavFontAwesome from "./NavFontAwesome";
 
-// import "./bootstrap.min.css"
 const Nav = () => {
+  const [showContainer, setShowContainer] = useState(false);
+
+  const navLinks = [
+    {
+      id: 1,
+      linkTitle: "Home",
+      link: "/",
+    },
+    {
+      id: 2,
+      linkTitle: "Shop",
+      link: "/shop",
+    },
+    {
+      id: 3,
+      linkTitle: "Product detail",
+      link: "/product-detail",
+    },
+  ];
+
+  const navFontAwsome = [
+    {
+      id: 1,
+      linkTitle: "Cart",
+      link: "/cart",
+      icon: faDollyFlatbed,
+    },
+    {
+      id: 2,
+      linkTitle: "",
+      link: "/fav",
+      icon: faHeart,
+    },
+    {
+      id: 3,
+      linkTitle: "Login",
+      link: "/login",
+      icon: faUserAlt,
+    },
+  ];
+
   return (
-    // <header className="header bg-white">
-    //   <div className="container px-0 px-lg-3">
-    //     <nav className="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
-    //       {/* <Link className="navbar-brand" to="/">
-    //         <span className="font-weight-bold text-uppercase text-dark">
-    //           Boutique
-    //         </span>
-    //       </Link> */}
-    //       <button
-    //         className="navbar-toggler navbar-toggler-right"
-    //         type="button"
-    //         data-toggle="collapse"
-    //         data-target="#navbarSupportedContent"
-    //         aria-controls="navbarSupportedContent"
-    //         aria-expanded="false"
-    //         aria-label="Toggle navigation"
-    //       >
-    //         <span className="navbar-toggler-icon"></span>
-    //       </button>
-    //       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-    //         <ul className="navbar-nav mr-auto">
-              // <li className="nav-item">
-              //   <Link className="nav-link" to="/">
-              //     Home
-              //   </Link>
-              // </li>
-              // <li className="nav-item">
-              //   <Link className="nav-link" to="/shop">
-              //     Shop
-              //   </Link>
-              // </li>
-              // <li className="nav-item">
-              //   <Link className="nav-link" to="/product-detail">
-              //     Product detail
-              //   </Link>
-              // </li>
-    //         </ul>
-    //         <ul className="navbar-nav ml-auto">
-              // <li className="nav-item">
-              //   <Link className="nav-link" to="/cart">
-              //     <i className="mr-1 text-gray">
-              //       <FontAwesomeIcon icon={faDollyFlatbed} />
-              //     </i>
-              //     Cart
-              //     <small className="text-gray">(2)</small>
-              //   </Link>
-              // </li>
-              // <li className="nav-item">
-              //   <a className="nav-link" href="#">
-              //     <i className="far mr-1">
-              //       <FontAwesomeIcon icon={faHeart} />
-              //     </i>
-              //     <small className="text-gray"> (0)</small>
-              //   </a>
-              // </li>
-              // <li className="nav-item">
-              //   <Link className="nav-link" to="/login">
-              //     <i className="mr-1 text-gray">
-              //       <FontAwesomeIcon icon={faUserAlt} />
-              //     </i>
-              //     Login
-              //   </Link>
-              // </li>
-    //         </ul>
-    //       </div>
-    //     </nav>
-    //   </div>
-    // </header>
     <header className="header bg-white">
-        <div className="container px-0 px-lg-3">
-          <nav className="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
-            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button>
-            <div className="collapse navbar-collapse d-flex justify-content-around">
-             <div className="nav-links">
-             <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/shop">
-                  Shop
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/product-detail">
-                  Product detail
-                </Link>
-              </li>
-              </ul>
-             </div>
-             <div className="icon">
-             <a className="navbar-brand" href="index.html"><span className="font-weight-bold text-uppercase text-dark">Boutique</span></a>
-             </div>
-              
-             <div className="login-cart-fav">
-             <ul className="navbar-nav ml-auto">               
-              <li className="nav-item">
-                <Link className="nav-link" to="/cart">
-                  <i className="mr-1 text-gray">
-                    <FontAwesomeIcon icon={faDollyFlatbed} />
-                  </i>
-                  Cart
-                  <small className="text-gray">(2)</small>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  <i className="far mr-1">
-                    <FontAwesomeIcon icon={faHeart} />
-                  </i>
-                  <small className="text-gray"> (0)</small>
-                </a>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  <i className="mr-1 text-gray">
-                    <FontAwesomeIcon icon={faUserAlt} />
-                  </i>
-                  Login
-                </Link>
-              </li>
-              </ul>
-             </div>
+      <div className="container px-0 px-lg-3">
+        <nav className="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
+          <div className="collapse navbar-collapse d-flex justify-content-around flex-custom ">
+            <div className="nav-links w-100 ">
+              <div className="d-flex w-100 justify-content-between">
+                <div>
+                  <Link to="/" className="navbar-brand">
+                    <span
+                      className="font-weight-bold text-uppercase text-dark"
+                      id="logo"
+                    >
+                      Boutique
+                    </span>
+                  </Link>
+                </div>
+                <div>
+                  <button
+                    className="navbar-toggler navbar-toggler-right"
+                    type="button"
+                    onClick={() => setShowContainer(!showContainer)}
+                  >
+                    <span className="navbar-toggler-icon"></span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={`${
+                  showContainer
+                    ? "links-container show-container d-flex justify-content-lg-around flex-lg-row flex-sm-column custom-css-nav"
+                    : "links-container  d-flex justify-content-lg-around flex-lg-row flex-sm-column custom-css-nav"
+                }`}
+              >
+                <ul className="navbar-nav mr-auto d-flex">
+                  <div className="d-lg-flex justify-content-between ">
+                    {navLinks.map((navLink) => {
+                      return <NavLink {...navLink} />;
+                    })}
+                  </div>
+                </ul>
+                <div className="icon">
+                  <Link to="/" className="navbar-brand">
+                    <span
+                      className="font-weight-bold text-uppercase text-dark"
+                      id="logo"
+                    >
+                      Boutique
+                    </span>
+                  </Link>
+                </div>
+                <div className="login-cart-fav">
+                  <ul className="navbar-nav ml-auto ">
+                    {navFontAwsome.map((navFontAwsomeItem) => {
+                      return <NavFontAwesome {...navFontAwsomeItem} />;
+                    })}
+                  </ul>
+                </div>
+              </div>
             </div>
-          </nav>
-        </div>
-      </header>
+          </div>
+        </nav>
+      </div>
+    </header>
   );
 };
 
