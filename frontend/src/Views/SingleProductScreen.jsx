@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import RelatedProducts from "../components/RelatedProducts";
 import Tabs from "../components/Tabs";
-import { getSingleProduct } from "../redux/actions";
+import { addItemToCard, getSingleProduct } from "../redux/actions";
 
 const SingleProductScreen = ({
   getSingleProductData,
   productData = { reviews: [] },
   products = [],
+  
 }) => {
   const tabs = ["Description", "Reviews"];
   const { name, price, image, condition, longDescription, category, reviews } = productData;
@@ -18,6 +20,10 @@ const SingleProductScreen = ({
   useEffect(() => {
     getSingleProductData(id);
   }, [id]);
+
+  // const handleAddToCart = ()=>{
+  //   addItemToCartFunction(id)
+  // }
 
   return (
     <div className="page-holder bg-light">
@@ -76,12 +82,13 @@ const SingleProductScreen = ({
                   </div>
                 </div>
                 <div className="col-sm-3 pl-sm-0">
-                  <a
+                  <Link
                     className="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0"
-                    href="cart.html"
+                    to={`/cart/${id}`}
+                    
                   >
                     Add to cart
-                  </a>
+                  </Link>
                 </div>
               </div>
 

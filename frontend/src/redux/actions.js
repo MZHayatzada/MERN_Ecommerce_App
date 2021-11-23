@@ -1,5 +1,5 @@
 const { default: axios } = require("axios");
-const { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, GET_PRODUCT_REQUEST, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAIL, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, GET_SINGLE_PRODUCT_FAIL } = require("./constants")
+const { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, GET_PRODUCT_REQUEST, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAIL, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, GET_SINGLE_PRODUCT_FAIL, DECREASE_ITEM_FROM_CART, INCREASE_ITEM_TO_CART, CLEAR_CART, ADD_ITEM_TO_CART } = require("./constants")
     //Login user
 export const login_user = (email, password) => async(dispatch) => {
         try {
@@ -29,4 +29,23 @@ export const getSingleProduct = (id) => async(dispatch) => {
     } catch (error) {
         dispatch({ type: GET_SINGLE_PRODUCT_FAIL, payload: error })
     }
+}
+
+export const addItemToCard = (singleProduct) => (dispatch) => {
+    try {
+        dispatch({ type: ADD_ITEM_TO_CART, payload: singleProduct });
+
+    } catch (error) {
+        dispatch({ type: GET_SINGLE_PRODUCT_FAIL, payload: error })
+    }
+}
+
+export const increaseItemToCard = (id) => (dispatch) => {
+    dispatch({ type: INCREASE_ITEM_TO_CART, payload: id })
+}
+export const decreaseItemFromCart = (id) => (dispatch) => {
+    dispatch({ type: DECREASE_ITEM_FROM_CART, payload: id })
+}
+export const clearCart = (id) => (dispatch) => {
+    dispatch({ type: CLEAR_CART })
 }

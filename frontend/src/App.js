@@ -20,7 +20,7 @@ function App() {
         <Route path='/register'>
           <Register/>
         </Route>
-        <Route path='/cart'>
+        <Route path='/cart/:id'>
           <CartScreen/>
         </Route>
         <Route exact path='/'>
