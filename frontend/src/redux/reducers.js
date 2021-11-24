@@ -1,7 +1,7 @@
 import { ADD_ITEM_TO_CART, GET_PRODUCT_FAIL, GET_PRODUCT_REQUEST, GET_PRODUCT_SUCCESS, GET_SINGLE_PRODUCT_FAIL, GET_SINGLE_PRODUCT_REQUEST, GET_SINGLE_PRODUCT_SUCCESS, INCREASE_ITEM_TO_CART, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS } from "./constants";
 import store from './store'
 
-export const loginReducer = (state = { email: '', password: '' }, action) => {
+export const loginReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGIN_REQUEST:
             return {...state, loading: true }
@@ -44,7 +44,6 @@ export const getSingleProductReducer = (state = [], action) => {
     }
 }
 
-const initialState = { cartItems: [] }
 
 //Cart reducer 
 export const cartReducer = (state = { cart: [] }, action) => {
@@ -71,10 +70,7 @@ export const cartReducer = (state = { cart: [] }, action) => {
                 cart: [...state.cart, item]
             }
         }
-
-
     }
     return state
-
 
 }

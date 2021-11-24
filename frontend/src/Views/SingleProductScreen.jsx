@@ -1,10 +1,12 @@
+import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import RelatedProducts from "../components/RelatedProducts";
 import Tabs from "../components/Tabs";
-import { addItemToCard, getSingleProduct } from "../redux/actions";
+import {  getSingleProduct } from "../redux/actions";
 
 const SingleProductScreen = ({
   getSingleProductData,
@@ -13,7 +15,7 @@ const SingleProductScreen = ({
   
 }) => {
   const tabs = ["Description", "Reviews"];
-  const { name, price, image, condition, longDescription, category, reviews } = productData;
+  const { name, price, image, condition, longDescription, category, reviews,quantity } = productData;
   const history = useHistory();
   let id = history.location.pathname.split("/")[2];
 
@@ -21,10 +23,33 @@ const SingleProductScreen = ({
     getSingleProductData(id);
   }, [id]);
 
-  // const handleAddToCart = ()=>{
-  //   addItemToCartFunction(id)
-  // }
+  const increaseQty = ()=>{
+      let num = parseInt(quantity);
+      setQty((prev)=>{
+       return qty>(num-1)?prev=num:prev+1;
+      })
+  }
+  const decreaseQty = ()=>{
+    setQty((prev)=>{
+      if(qty<2){
+        return 1
+      }
+      prev-=1
+      return prev
+    })
+  }
 
+  
+  const qtyRef = useRef()
+  const [qty, setQty] = useState(1)
+  const addToCartHandler = ()=>{
+    history.push({
+      pathname: `/cart/${id}`,
+      state: { qty: qty,
+      singleProductQty:quantity }
+    })
+  }
+ 
   return (
     <div className="page-holder bg-light">
       <section className="py-5">
@@ -67,28 +92,32 @@ const SingleProductScreen = ({
                       Quantity
                     </span>
                     <div className="quantity">
-                      <button className="dec-btn p-0">
-                        <i className="fas fa-caret-left"></i>
+                      <button className="dec-btn p-0" onClick={()=>decreaseQty()}>
+                        <FontAwesomeIcon icon={faCaretLeft}></FontAwesomeIcon>
                       </button>
                       <input
-                        className="form-control border-0 shadow-0 p-0"
+                        className="form-control border-0 shadow-0 p-0 w-25"
                         type="text"
-                        value="1"
+                        ref={qtyRef}
+                        value={qty}
+                        
                       />
-                      <button className="inc-btn p-0">
-                        <i className="fas fa-caret-right"></i>
+                      <button onClick={()=>increaseQty()} className="inc-btn p-0">
+                        <FontAwesomeIcon icon={faCaretRight}></FontAwesomeIcon>
                       </button>
                     </div>
                   </div>
                 </div>
+                
+
+
                 <div className="col-sm-3 pl-sm-0">
-                  <Link
-                    className="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0"
-                    to={`/cart/${id}`}
-                    
+                  <button
+                    className="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0 px-2"
+                    onClick= {()=>addToCartHandler()}
                   >
                     Add to cart
-                  </Link>
+                  </button>
                 </div>
               </div>
 
@@ -134,7 +163,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return { getSingleProductData: (id) => dispatch(getSingleProduct(id)) };
 };
-
 export default connect(
   mapStateToProps,
   mapDispatchToProps
