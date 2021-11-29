@@ -88,8 +88,8 @@ const Nav = () => {
               >
                 <ul className="navbar-nav mr-auto d-flex">
                   <div className="d-lg-flex justify-content-between ">
-                    {navLinks.map((navLink) => {
-                      return <NavLink {...navLink} />;
+                    {navLinks.map((navLink,index) => {
+                      return <NavLink key={index} {...navLink} />;
                     })}
                   </div>
                 </ul>
@@ -105,8 +105,8 @@ const Nav = () => {
                 </div>
                 <div className="login-cart-fav">
                   <ul className="navbar-nav ml-auto ">
-                    {navFontAwsome.map((navFontAwsomeItem) => {
-                      return <NavFontAwesome {...navFontAwsomeItem} />;
+                    {navFontAwsome.map((navFontAwsomeItem,index) => {
+                      return <NavFontAwesome key={index} {...navFontAwsomeItem} />;
                     })}
                   </ul>
                 </div>

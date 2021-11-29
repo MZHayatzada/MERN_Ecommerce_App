@@ -6,50 +6,44 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import RelatedProducts from "../components/RelatedProducts";
 import Tabs from "../components/Tabs";
-import {  getSingleProduct } from "../redux/actions";
+import {
+  addItemToCard,
+  getSingleProduct,
+} from "../redux/actions";
 
 const SingleProductScreen = ({
   getSingleProductData,
   productData = { reviews: [] },
   products = [],
-  
+  addToCart,
 }) => {
   const tabs = ["Description", "Reviews"];
-  const { name, price, image, condition, longDescription, category, reviews,quantity } = productData;
+  const {
+    name,
+    price,
+    image,
+    condition,
+    longDescription,
+    category,
+    reviews,
+    quantity,
+  } = productData;
   const history = useHistory();
   let id = history.location.pathname.split("/")[2];
-
   useEffect(() => {
     getSingleProductData(id);
   }, [id]);
 
-  const increaseQty = ()=>{
-      let num = parseInt(quantity);
-      setQty((prev)=>{
-       return qty>(num-1)?prev=num:prev+1;
-      })
-  }
-  const decreaseQty = ()=>{
-    setQty((prev)=>{
-      if(qty<2){
-        return 1
-      }
-      prev-=1
-      return prev
-    })
-  }
+  const [qty, setQty] = useState(1);
 
-  
-  const qtyRef = useRef()
-  const [qty, setQty] = useState(1)
-  const addToCartHandler = ()=>{
+  const addToCartHandler = () => {
+    addToCart(id,qty);
     history.push({
       pathname: `/cart/${id}`,
-      state: { qty: qty,
-      singleProductQty:quantity }
-    })
-  }
- 
+      state: { qty, quantity },
+    });
+  };
+
   return (
     <div className="page-holder bg-light">
       <section className="py-5">
@@ -91,30 +85,23 @@ const SingleProductScreen = ({
                     <span className="small text-uppercase text-gray mr-4 no-select">
                       Quantity
                     </span>
-                    <div className="quantity">
-                      <button className="dec-btn p-0" onClick={()=>decreaseQty()}>
-                        <FontAwesomeIcon icon={faCaretLeft}></FontAwesomeIcon>
-                      </button>
-                      <input
-                        className="form-control border-0 shadow-0 p-0 w-25"
-                        type="text"
-                        ref={qtyRef}
-                        value={qty}
-                        
-                      />
-                      <button onClick={()=>increaseQty()} className="inc-btn p-0">
-                        <FontAwesomeIcon icon={faCaretRight}></FontAwesomeIcon>
-                      </button>
-                    </div>
+                    <select
+                      value={qty}
+                      onChange={(e) => setQty(e.target.value)}
+                    >
+                      {[...Array(quantity).keys()].map((x) => {
+                       return( <option key={x + 1} value={x + 1}>
+                        {x+1}
+                      </option>)
+                      })}
+                    </select>
                   </div>
                 </div>
-                
-
 
                 <div className="col-sm-3 pl-sm-0">
                   <button
                     className="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0 px-2"
-                    onClick= {()=>addToCartHandler()}
+                    onClick={() => addToCartHandler()}
                   >
                     Add to cart
                   </button>
@@ -161,7 +148,10 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return { getSingleProductData: (id) => dispatch(getSingleProduct(id)) };
+  return {
+    getSingleProductData: (id) => dispatch(getSingleProduct(id)),
+    addToCart: (id,qty) => dispatch(addItemToCard(id,qty)),
+  };
 };
 export default connect(
   mapStateToProps,

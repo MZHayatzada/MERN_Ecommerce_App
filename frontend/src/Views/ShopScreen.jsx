@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getProducts } from "../redux/actions";
 import SingleProduct from "../components/SingleProduct";
 const ShopScreen = ({ products = [],loading=true, getData }) => {
+  
   useEffect(() => {
     getData();
   }, []);

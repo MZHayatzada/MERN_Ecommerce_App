@@ -6,7 +6,8 @@ const productSchema = new Schema({
     price: { type: Number, required: true },
     condition: { type: String, required: true },
     image: { type: String, required: true },
-    quantity: { type: String, required: true },
+    quantity: { type: Number, required: true },
+    amount: { type: Number, required: true },
     category: { type: String, required: true },
     longDescription: { type: String, required: true },
     reviews: [{
