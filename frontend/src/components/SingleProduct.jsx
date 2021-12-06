@@ -2,8 +2,10 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { faExpand } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-const SingleProduct = ({id,name,price,image}) => {
+import { addItemToCard } from '../redux/actions';
+const SingleProduct = ({id,name,price,image,addItemToCardAction}) => {
     return (
         <div className="col-lg-4 col-sm-6">
         <div className="product text-center">
@@ -18,15 +20,9 @@ const SingleProduct = ({id,name,price,image}) => {
             </Link>
             <div className="product-overlay">
               <ul className="mb-0 list-inline">
+                
                 <li className="list-inline-item m-0 p-0">
-                  <a className="btn btn-sm btn-outline-dark" href="#">
-                    <i>
-                        <FontAwesomeIcon icon={faHeart}/>
-                    </i>
-                  </a>
-                </li>
-                <li className="list-inline-item m-0 p-0">
-                  <Link className="btn btn-sm btn-dark" to='/cart'>
+                  <Link className="btn btn-sm btn-dark" to={`/cart/id=${id}&qty=${1}`} onClick={()=>addItemToCardAction(id,1)}>
                     Add to cart
                   </Link>
                 </li>
@@ -55,4 +51,10 @@ const SingleProduct = ({id,name,price,image}) => {
     )
 }
 
-export default SingleProduct
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    addItemToCardAction:(id,qty)=>dispatch(addItemToCard(id,qty))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(SingleProduct)

@@ -77,4 +77,18 @@ export const cartReducer = (state = { cart: [] }, action) => {
 
 }
 
+export const qtyChangeReducer = (state = [], action) => {
+    const item = action.payload
+    console.log(action.payload);
+    console.log(item);
+    if (action.type === 'CHANGED') {
+        return {
+            ...state,
+            cart: {...state.cart, qty: item.qty }
+        }
+    }
+    return state
+
+}
+
 //Calculate Total Reducer

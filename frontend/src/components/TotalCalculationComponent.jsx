@@ -9,11 +9,14 @@ const TotalCalculationComponent = ({cart1}) => {
         return item.price * parseInt(item.qty)
     })
 
+    function cal(){
     let totalPrice = allPrices.reduce((acc,curr)=>{
         return acc+curr
-    },0)
+    },0)}
 
-
+    useEffect(() => {
+      cal()
+    }, [cart1])
     
 
     return (

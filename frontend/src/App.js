@@ -20,9 +20,8 @@ function App() {
         <Route path='/register'>
           <Register/>
         </Route>
-        <Route path='/cart/:id'>
-          <CartScreen/>
-        </Route>
+        <Route path="/cart/id=:id?&qty=:qty?" component={CartScreen}></Route>
+
         <Route exact path='/'>
           <HomeScreen/>
         </Route>

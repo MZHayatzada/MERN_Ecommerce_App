@@ -3,39 +3,29 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import {
   addItemToCard,
-  calculateEachItemTotal,
-  calculateTotal,
-  decreaseItemFromCart,
   getSingleProduct,
-  increaseItemToCart,
 } from "../redux/actions";
 import SingleCartItem from "../components/SingleCartItem";
-import TotalCalculationComponent from "../components/TotalCalculationComponent";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
 const CartScreen = ({
   cartItem = [],
 }) => {
   const location = useLocation();
-
-  const qty = useState(location.state.qty);
-  let itemQty = location.state.qty
-  let quantity = location.state.quantity;
+  let {qty} = useParams()
   const { cart } = cartItem;
 
     let allPrices = cart.map((item)=>{
         return item.price * parseInt(item.qty)
     })
-
     let totalPrice = allPrices.reduce((acc,curr)=>{
         return acc+curr
     },0)
-
+    const [totalCartPrice, setTotalCartPrice] = useState(totalPrice)
     useEffect(() => {
-      totalPrice = allPrices.reduce((acc,curr)=>{
-        return acc+curr
-    },0)
-    }, [quantity])
+     setTotalCartPrice(totalPrice)
+    }, [cart])
+
+
 
   return (
     <section className="container py-5">
@@ -75,7 +65,7 @@ const CartScreen = ({
                 ) : (
                   cart.map((item,index) => {
                     return (
-                      <SingleCartItem key={index} {...item} quantity={quantity} itemQty={parseInt(item.qty)} />
+                      <SingleCartItem key={index} {...item} quantity={item.quantity} itemQty={item.qty} />
                     );
                   })
                 )}
@@ -111,14 +101,14 @@ const CartScreen = ({
                 <strong className="text-uppercase small font-weight-bold">
                   Subtotal
                 </strong>
-                <span className="text-muted small">$ {0} </span>
+                <span className="text-muted small">$ {totalCartPrice} </span>
               </li>
               <li className="border-bottom my-2"></li>
               <li className="d-flex align-items-center justify-content-between mb-4">
                 <strong className="text-uppercase small font-weight-bold">
                   Total
                 </strong>
-                <span>$ {totalPrice}</span>
+                <span>${totalCartPrice}</span>
               </li>
               <li>
                 <form action="#">

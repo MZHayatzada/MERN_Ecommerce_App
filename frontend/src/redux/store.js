@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk';
-import { loginReducer, getProductReducer, getSingleProductReducer, cartReducer, calculateTotalReducer, calculationReducer } from './reducers';
+import { loginReducer, getProductReducer, getSingleProductReducer, cartReducer, calculateTotalReducer, calculationReducer, qtyChangeReducer } from './reducers';
 
 const rootReducer = combineReducers({
     login: loginReducer,
     products: getProductReducer,
     singleProduct: getSingleProductReducer,
     cartItems: cartReducer,
+    qtyChange: qtyChangeReducer
 });
 
 

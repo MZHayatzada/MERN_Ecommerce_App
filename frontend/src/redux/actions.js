@@ -45,3 +45,13 @@ export const addItemToCard = (id, qty) => async(dispatch, getState) => {
     // localStorage.setItem('cartItems', JSON.stringify(getState().cartItems.cart))
 
 }
+export const qtyChanged = (id, qty) => async(dispatch) => {
+    try {
+        dispatch({ type: 'GET_SINGLE_PRODUCT_REQUEST_CHANGE' });
+        const { data } = await axios.get(`/products/${id}`);
+        dispatch({ type: 'CHANGED', payload: {...data.singleProduct, qty } })
+
+    } catch (error) {
+        dispatch({ type: GET_SINGLE_PRODUCT_FAIL, payload: error })
+    }
+}

@@ -92,12 +92,13 @@ const Footer = () => {
             </div>
             <div className="col-lg-6 text-lg-right">
               <p className="small text-muted mb-0">
-                Template designed by
+                Template designed by : 
                 <a
                   className="text-white reset-anchor"
                   href="https://bootstraptemple.com/p/bootstrap-ecommerce"
+                  target='_blank'
                 >
-                  By M.Zafar
+                  Bootstrapious and Functionality added by M.Zafar
                 </a>
               </p>
             </div>

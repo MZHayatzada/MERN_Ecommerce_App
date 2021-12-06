@@ -2,7 +2,7 @@ import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import RelatedProducts from "../components/RelatedProducts";
 import Tabs from "../components/Tabs";
@@ -39,10 +39,11 @@ const SingleProductScreen = ({
   const addToCartHandler = () => {
     addToCart(id,qty);
     history.push({
-      pathname: `/cart/${id}`,
-      state: { qty, quantity },
+      pathname: `/cart/id=${id}&qty=${qty}`,
+      state:{quantity}
     });
   };
+
 
   return (
     <div className="page-holder bg-light">

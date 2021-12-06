@@ -1,13 +1,23 @@
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { addItemToCard, qtyChanged } from '../redux/actions'
 
 
 
 
-const SingleCartItem = ({id,image,name,price,amount,itemQty,quantity,cartOfItem}) => {
-    const [qtyofItem,setQtyofItem] = useState(itemQty)
+const SingleCartItem = ({id,image,name,price,amount,itemQty,quantity,addItemToCardAction}) => {
+
+    const [qtyofItem,setQtyofItem] = useState(parseInt(itemQty));
+    useEffect(() => {
+      setQtyofItem(itemQty)
+    }, [itemQty])
+    const [total, setTotal] = useState(qtyofItem*price)
+    useEffect(() => {
+      setTotal(qtyofItem*price)
+    }, [qtyofItem])
+
     return (
         <tr key={id}>
         <th className="pl-0 border-0">
@@ -32,7 +42,7 @@ const SingleCartItem = ({id,image,name,price,amount,itemQty,quantity,cartOfItem}
             <span className="small text-uppercase text-gray headings-font-family">
               Quantity
             </span>
-            <select value={qtyofItem} onChange={(e)=>setQtyofItem(e.target.value)}>
+            <select value={parseInt(qtyofItem)} onChange={(e)=>addItemToCardAction(id,e.target.value)}>
               {
                 [...Array(quantity).keys()].map((x)=>{
                   return(
@@ -44,7 +54,7 @@ const SingleCartItem = ({id,image,name,price,amount,itemQty,quantity,cartOfItem}
           </div>
         </td>
         <td className="align-middle border-0">
-          <p className="mb-0 small">${qtyofItem*price}</p>
+          <p className="mb-0 small">${total}</p>
         </td>
         <td className="align-middle border-0">
           <a className="reset-anchor" href="#">
@@ -63,7 +73,11 @@ const mapStateToProps = (store)=>{
         cartOfItem:store.cartItems.cart
       }
 }
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    addItemToCardAction:(id,qty)=>dispatch(addItemToCard(id,qty))
+  }
+}
 
 
-
-export default connect(mapStateToProps)(SingleCartItem)
+export default connect(mapStateToProps,mapDispatchToProps)(SingleCartItem)
