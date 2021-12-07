@@ -1,12 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../redux/actions";
 import SingleProduct from "../components/SingleProduct";
+import Model from "../components/Model";
 const ShopScreen = ({ products = [],loading=true, getData }) => {
   
   useEffect(() => {
     getData();
   }, []);
+  const [isOpen, setIsOpen] = useState(false)
+  const open = ()=>{
+    setIsOpen(true)
+  }
+  const close = ()=>{
+    setIsOpen(false)
+  }
 
   return (
     <div>
@@ -343,9 +351,8 @@ const ShopScreen = ({ products = [],loading=true, getData }) => {
                     return <SingleProduct key={product.id} {...product} />;
                   }) }
                 </div>
-
-                
-                <nav aria-label="Page navigation example">
+             
+                <nav >
                   <ul className="pagination justify-content-center justify-content-lg-end">
                     <li className="page-item">
                       <a className="page-link" href="#" aria-label="Previous">

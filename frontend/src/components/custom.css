@@ -24,3 +24,12 @@
 .hero {
     background: url(hero-banner-alt.jpg);
 }
+
+.close-btn {
+    margin-left: 90% !important;
+    padding-top: 15px;
+}
+
+.btn-close-style {
+    cursor: pointer;
+}

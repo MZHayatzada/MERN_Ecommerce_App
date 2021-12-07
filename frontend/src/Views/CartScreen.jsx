@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router";
+import {  useLocation } from "react-router";
 import {
   addItemToCard,
   getSingleProduct,

@@ -24,11 +24,7 @@ const Nav = () => {
       linkTitle: "Shop",
       link: "/shop",
     },
-    {
-      id: 3,
-      linkTitle: "Product detail",
-      link: "/product-detail",
-    },
+    
   ];
 
   const navFontAwsome = [

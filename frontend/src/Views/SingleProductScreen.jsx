@@ -1,9 +1,6 @@
-import { faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { Link } from "react-router-dom";
 import RelatedProducts from "../components/RelatedProducts";
 import Tabs from "../components/Tabs";
 import {

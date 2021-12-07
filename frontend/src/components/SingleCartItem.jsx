@@ -17,7 +17,7 @@ const SingleCartItem = ({id,image,name,price,amount,itemQty,quantity,addItemToCa
     useEffect(() => {
       setTotal(qtyofItem*price)
     }, [qtyofItem])
-
+    
     return (
         <tr key={id}>
         <th className="pl-0 border-0">

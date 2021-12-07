@@ -1,13 +1,21 @@
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { faExpand } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { addItemToCard } from '../redux/actions';
-const SingleProduct = ({id,name,price,image,addItemToCardAction}) => {
+import Model from './Model';
+const SingleProduct = ({id,name,price,image,longDescription,addItemToCardAction}) => {
+    const [isOpenModel, setIsOpenModel] = useState(false);
+    const open = ()=>{
+      setIsOpenModel(true)
+    }
+    const close = ()=>{
+      setIsOpenModel(false)
+    }
     return (
         <div className="col-lg-4 col-sm-6">
+          
         <div className="product text-center">
           <div className="mb-3 position-relative">
             <div className="badge text-white badge-"></div>
@@ -33,13 +41,14 @@ const SingleProduct = ({id,name,price,image,addItemToCardAction}) => {
                     data-toggle="modal"
                   >
                     <i>
-                        <FontAwesomeIcon icon={faExpand}/>
+                        <FontAwesomeIcon onClick={()=>open()}  icon={faExpand}/>
                     </i>
                   </a>
                 </li>
               </ul>
             </div>
           </div>
+          <Model open={isOpenModel} name={name} image={image} longDescription={longDescription} price={price} close={close} />
           <h6>
             <a className="reset-anchor" href="detail.html">
               {name}

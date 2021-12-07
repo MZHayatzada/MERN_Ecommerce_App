@@ -9,6 +9,8 @@ import CartScreen from "./Views/CartScreen";
 import HomeScreen from "./Views/HomeScreen";
 import ShopScreen from "./Views/ShopScreen";
 import SingleProductScreen from "./Views/SingleProductScreen";
+import { Modal } from "bootstrap";
+import Model from "./components/Model";
 function App() {
   return (
     <Router>
@@ -20,13 +22,15 @@ function App() {
         <Route path='/register'>
           <Register/>
         </Route>
-        <Route path="/cart/id=:id?&qty=:qty?" component={CartScreen}></Route>
-
+        <Route path="/cart/:id?/:qty?" component={CartScreen}></Route>
         <Route exact path='/'>
           <HomeScreen/>
         </Route>
         <Route path='/shop'>
           <ShopScreen/>
+        </Route>
+        <Route path='/model'>
+          <Model/>
         </Route>
         <Route  path={'/singleProduct/:id'}>
           <SingleProductScreen/>
