@@ -10,13 +10,12 @@ import { useParams } from "react-router-dom";
 const CartScreen = ({
   cartItem = [],
 }) => {
-  const location = useLocation();
-  let {qty} = useParams()
   const { cart } = cartItem;
 
     let allPrices = cart.map((item)=>{
         return item.price * parseInt(item.qty)
     })
+    
     let totalPrice = allPrices.reduce((acc,curr)=>{
         return acc+curr
     },0)

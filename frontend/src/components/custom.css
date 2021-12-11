@@ -7,6 +7,10 @@
     }
 }
 
+#root {
+    z-index: 1;
+}
+
 .heading h1 {
     color: #dcb14a;
 }
@@ -32,4 +36,45 @@
 
 .btn-close-style {
     cursor: pointer;
+}
+
+.modal-style {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.overlay-style {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.btn-height {
+    height: 2.2rem;
+}
+
+@media screen and (max-width:1024px) {
+    .modal-style {
+        position: absolute;
+        flex-direction: column !important;
+        pointer-events: auto;
+        width: 90%;
+        overflow-y: auto;
+        margin: 10px 0;
+        /* height: 90%; */
+    }
+    /* .image {
+        width: 100px;
+        height: 100px;
+    } */
 }

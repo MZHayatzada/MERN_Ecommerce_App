@@ -11,10 +11,10 @@ const NavFontAwesome = (props) => {
           <FontAwesomeIcon icon={icon} /> 
         </i>
         { linkTitle }
-        {linkTitle === "Cart" && <small className="text-gray ms-1"> (2) </small>}
+        {linkTitle === "Cart" && <small className="text-gray ms-1"> </small>}
       </Link>
     </li>
   );
 };
 
-export default NavFontAwesome;
+export default  NavFontAwesome;

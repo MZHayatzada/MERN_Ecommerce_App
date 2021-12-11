@@ -80,10 +80,11 @@ const SingleProductScreen = ({
               <div className="row align-items-stretch mb-4">
                 <div className="col-sm-5 pr-sm-0">
                   <div className="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white">
-                    <span className="small text-uppercase text-gray mr-4 no-select">
+                    <span className="small text-uppercase text-gray no-select">
                       Quantity
                     </span>
                     <select
+                    className="form-select  w-50"
                       value={qty}
                       onChange={(e) => setQty(e.target.value)}
                     >

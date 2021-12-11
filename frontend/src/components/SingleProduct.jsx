@@ -30,25 +30,25 @@ const SingleProduct = ({id,name,price,image,longDescription,addItemToCardAction}
               <ul className="mb-0 list-inline">
                 
                 <li className="list-inline-item m-0 p-0">
-                  <Link className="btn btn-sm btn-dark" to={`/cart/id=${id}&qty=${1}`} onClick={()=>addItemToCardAction(id,1)}>
+                  <Link className="btn btn-sm btn-dark btn-height" to={`/cart/id=${id}&qty=${1}`} onClick={()=>addItemToCardAction(id,1)}>
                     Add to cart
                   </Link>
                 </li>
                 <li className="list-inline-item mr-0">
                   <a
-                    className="btn btn-sm btn-outline-dark"
-                    href="#productView"
-                    data-toggle="modal"
+                   
                   >
-                    <i>
-                        <FontAwesomeIcon onClick={()=>open()}  icon={faExpand}/>
-                    </i>
+                    
+                        <button className='btn btn-dark btn-height' onClick={()=>open()}>
+                          <i><FontAwesomeIcon   icon={faExpand}/></i>
+                        </button>
+                    
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-          <Model open={isOpenModel} name={name} image={image} longDescription={longDescription} price={price} close={close} />
+          <Model open={isOpenModel} id={id} name={name} image={image} longDescription={longDescription} price={price} close={close} />
           <h6>
             <a className="reset-anchor" href="detail.html">
               {name}
