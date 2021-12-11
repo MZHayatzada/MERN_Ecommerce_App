@@ -4,7 +4,7 @@ const { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL, GET_PRODUCT_REQUEST, GET_PRODU
 export const login_user = (email, password) => async(dispatch) => {
         try {
             dispatch({ type: LOGIN_REQUEST });
-            const response = await axios.post('/login', { email, password })
+            const response = await axios.post('/user/login', { email, password })
             dispatch({ type: LOGIN_SUCCESS, payload: response })
         } catch (error) {
             dispatch({ type: LOGIN_FAIL, payload: error })
